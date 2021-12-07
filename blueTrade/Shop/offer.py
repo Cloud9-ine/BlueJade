@@ -208,6 +208,8 @@ def offerStillSelling(request):
             respond = []
             idx = 0
             for offer in offerSet:
+                if offer.status == 3 or offer.status == 4:
+                    continue
                 temp = {"id": str(offer.id), "price": str(offer.price), "message": offer.message,
                         "buyerName": offer.buyer.name, "commodityName": offer.commodity.name,
                         "created": str(offer.created), "status": offer.status,
