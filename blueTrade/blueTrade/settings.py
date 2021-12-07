@@ -152,8 +152,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'blue.trade.official@gmail.com'
-EMAIL_HOST_PASSWORD = '1997cloud9'
+EMAIL_HOST_USER = '********@gmail.com'
+EMAIL_HOST_PASSWORD = '********'
 EMAIL_PORT = 587
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
