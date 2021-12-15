@@ -40,9 +40,9 @@ def searchCommodity(request):
                 photos = comm.url.split()
 
             temp = {"id": str(comm.id), "name": comm.name, "owner": comm.owner.name,
-                    "category": comm.category, "description": comm.description, "price": str(comm.price),
-                    "num of stock": str(comm.numofstock), "createDate": str(comm.createdate),
-                    "updateDate": (str(comm.updatedate))[:10],
+                    "category": comm.category, "description": comm.description, "price": str(comm.price)[:-2],
+                    "num of stock": str(comm.numofstock), "createDate": str(comm.createdate)[:19],
+                    "updateDate": (str(comm.updatedate))[:19],
                     "photos": photos}
             # message[idx] = temp
             message.append(temp)
@@ -73,8 +73,8 @@ def searchById(request):
                        "name": comm.name, "owner": comm.owner.name,
                        "category": comm.category,
                        "description": comm.description,
-                       "price": str(comm.price), "numofstock": str(comm.numofstock),
-                       "createDate": str(comm.createdate), "updateDate": str(comm.updatedate)[:10],
+                       "price": str(comm.price)[:-2], "numofstock": str(comm.numofstock),
+                       "createDate": str(comm.createdate)[:19], "updateDate": str(comm.updatedate)[:19],
                        "onSale": comm.onsale, "photos": photos}
         else:
             message = "Commodity Not found!"
@@ -95,11 +95,15 @@ def searchByOwner(request):
             message = []
             idx = 0
             for comm in commoditySet:
+                if comm.completed == 1:
+                    # Omit those traded commodities
+                    continue
+
                 temp = {"id": str(comm.id),
                         "name": comm.name, "owner": comm.owner.name, "category": comm.category,
-                        "description": comm.description, "price": str(comm.price),
-                        "num of stock": str(comm.numofstock), "createDate": str(comm.createdate),
-                        "updateDate": str(comm.updatedate)[:10], "onSale": True}
+                        "description": comm.description, "price": str(comm.price)[:-2],
+                        "num of stock": str(comm.numofstock), "createDate": str(comm.createdate)[:19],
+                        "updateDate": str(comm.updatedate)[:19], "onSale": True}
                 # message[idx] = temp
                 message.append(temp)
                 idx += 1
@@ -136,9 +140,9 @@ def recommend(request):
                     photos.append(comm.url)
 
                 temp = {"id": str(comm.id), "name": comm.name, "owner": comm.owner.name,
-                        "category": comm.category, "description": comm.description, "price": str(comm.price),
-                        "num of stock": str(comm.numofstock), "createDate": str(comm.createdate),
-                        "updateDate": str(comm.updatedate)[:10],
+                        "category": comm.category, "description": comm.description, "price": str(comm.price)[:-2],
+                        "num of stock": str(comm.numofstock), "createDate": str(comm.createdate)[:19],
+                        "updateDate": str(comm.updatedate)[:19],
                         "photos": photos}
                 # message[idx] = temp
                 message.append(temp)

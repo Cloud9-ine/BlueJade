@@ -30,7 +30,7 @@ def offerCommodity(request):
         # message = request.POST["message"]
         # buyer = User.objects.filter(id=int(request.POST["buyer"])).get()
         # commodity = Commodity.objects.filter(id=int(request.POST["commodity"])).get()
-        price = int(body["price"])
+        price = float(body["price"])
         message = body["message"]
         buyer = User.objects.filter(email=body["buyer"]).get()
         # buyer = User.objects.filter(id=int(body["buyer"])).get()
@@ -169,10 +169,10 @@ def offerStillBuying(request):
     if 'buyer' in request.GET and request.GET['buyer']:
         buyer = User.objects.filter(email=request.GET['buyer']).get()
 
-        highestPrice = 0
-        offerSet = Message.objects.all()
-        for offer in offerSet:
-            highestPrice = max(highestPrice, offer.price)
+        # highestPrice = 0
+        # offerSet = Message.objects.all()
+        # for offer in offerSet:
+        #     highestPrice = max(highestPrice, offer.price)
 
         # offerSet = Message.objects.filter(buyer=buyer, status=0)
         offerSet = Message.objects.filter(buyer=buyer)
@@ -182,9 +182,15 @@ def offerStillBuying(request):
             for offer in offerSet:
                 if offer.status == 3 or offer.status == 4:
                     continue
+
+                highestPrice = 0
+                priceSet = Message.objects.filter(commodity=offer.commodity)
+                for p in priceSet:
+                    highestPrice = max(highestPrice, p.price)
+
                 temp = {"id": str(offer.id), "price": str(offer.price), "message": offer.message,
                         "buyer": offer.buyer.name, "commodityName": offer.commodity.name,
-                        "created": str(offer.created), "status": offer.status,
+                        "created": str(offer.created)[:19], "status": offer.status,
                         "highestPrice": str(highestPrice)}
                 respond.append(temp)
                 idx += 1
@@ -212,7 +218,7 @@ def offerStillSelling(request):
                     continue
                 temp = {"id": str(offer.id), "price": str(offer.price), "message": offer.message,
                         "buyerName": offer.buyer.name, "commodityName": offer.commodity.name,
-                        "created": str(offer.created), "status": offer.status,
+                        "created": str(offer.created)[:19], "status": offer.status,
                         "email": offer.buyer.email}
                 respond.append(temp)
                 idx += 1
@@ -269,7 +275,7 @@ def offerCommodityUpdate(request):
         # message = request.POST["message"]
         # buyer = User.objects.filter(id=int(request.POST["buyer"])).get()
         # commodity = Commodity.objects.filter(id=int(request.POST["commodity"])).get()
-        price = int(body["price"])
+        price = float(body["price"])
         message = body["message"]
         buyer = User.objects.filter(email=body["email"]).get()
         # commodity = Commodity.objects.filter(id=int(body["commodityId"])).get()

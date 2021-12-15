@@ -61,7 +61,7 @@ def postCommodity(request):
         name = body["name"]
         owner = User.objects.filter(email=body["owner"]).get()
         description = body["description"]
-        price = int(body["price"])
+        price = float(body["price"])
         category = body["category"]
 
         urls = body["photos"]

@@ -139,7 +139,7 @@ export default {
           .then((response) => {
             console.log('data received from server: '+JSON.stringify(response.data))
             alert(response.data.data)
-            if(response.data.data === 'update successfully!'){
+            if(response.data.data === 'Commodity updated!'){
               this.showUpdateForm = false
             }
           })

@@ -61,7 +61,7 @@
                 <!--              <a class="seller">{{ item.location }}</a>-->
                 <!--            </div>-->
                 <div class="title">
-                  <a class="seller">Update Date: {{ item.updateDate }}</a>
+                  <a class="seller">Post Date: {{ item.updateDate }}</a>
                 </div>
                 <!--            <div class="title">-->
                 <!--              <a class="seller">Contact me <i class="far fa-comment" /></a>-->
@@ -106,10 +106,10 @@ export default {
         label: 'Price: high to low',
       }, {
         value: 'most_recent',
-        label: 'Most recent updated',
+        label: 'Most recent posted',
       }, {
         value: 'least_recent',
-        label: 'Oldest updated',
+        label: 'Oldest posted',
       }],
       selectedFilter: null,
       // page: 1,

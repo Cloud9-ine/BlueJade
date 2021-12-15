@@ -41,7 +41,7 @@
             <!--            </el-row>-->
             <!--            <el-divider></el-divider>-->
             <el-row type="flex" justify="center">
-              <el-col cols="6">Update date:</el-col>
+              <el-col cols="6">Post date:</el-col>
               <el-col cols="12">{{ commodity.updateDate }}</el-col>
             </el-row>
             <!--          <el-divider></el-divider>-->

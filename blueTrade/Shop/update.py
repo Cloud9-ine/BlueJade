@@ -37,7 +37,7 @@ def updateCommodity(request):
         id = int(body["id"])
         name = body["name"]
         description = body["description"]
-        price = int(body["price"])
+        price = float(body["price"])
         onSale = True if body["onSale"] == "True" else False
 
         updateDic = {"name": name, "description": description, "price": price, "onsale": onSale}
